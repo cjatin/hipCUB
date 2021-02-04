@@ -29,7 +29,7 @@
 
 #ifndef HIPCUB_DEVICE_DEVICE_SEGMENTED_REDUCE_HPP_
 #define HIPCUB_DEVICE_DEVICE_SEGMENTED_REDUCE_HPP_
-
+#define THRUST_IGNORE_CUB_VERSION_CHECK
 #ifdef __HIP_PLATFORM_HCC__
     #include "../backend/rocprim/device/device_segmented_reduce.hpp"
 #elif defined(__HIP_PLATFORM_NVCC__)

@@ -22,6 +22,7 @@
 #define HIPCUB_HPP_
 
 #define HIPCUB_MAIN_HEADER_INCLUDED
+#define THRUST_IGNORE_CUB_VERSION_CHECK
 
 /// \file
 ///

@@ -22,7 +22,7 @@
 
 list(APPEND CMAKE_PREFIX_PATH /opt/rocm /opt/rocm/hip)
 if(CMAKE_CXX_COMPILER MATCHES ".*/nvcc$" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-    find_package(hip QUIET CONFIG PATHS /opt/rocm)
+    find_package(hip QUIET CONFIG PATHS ${ROCM_PATH})
     if(NOT hip_FOUND)
         find_package(HIP REQUIRED)
     endif()
@@ -31,7 +31,7 @@ if(CMAKE_CXX_COMPILER MATCHES ".*/nvcc$" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL 
        set(HIP_COMPILER "nvcc" CACHE STRING "HIP Compiler" FORCE)
     endif()
 else()
-  find_package(hip REQUIRED CONFIG PATHS /opt/rocm)
+	find_package(hip REQUIRED CONFIG PATHS ${ROCM_PATH})
 endif()
 
 if(HIP_COMPILER STREQUAL "nvcc")

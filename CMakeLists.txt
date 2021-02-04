@@ -22,11 +22,17 @@
 
 cmake_minimum_required(VERSION 3.5.1 FATAL_ERROR)
 
+if(NOT DEFINED ENV{ROCM_PATH})
+	set(ROCM_PATH "/opt/rocm")
+else()
+	set(ROCM_PATH $ENV{ROCM_PATH})
+endif()
+message("ROCM PATH: ${ROCM_PATH}")
 # Install prefix
-set(CMAKE_INSTALL_PREFIX "/opt/rocm" CACHE PATH "Install path prefix, prepended onto install directories")
+set(CMAKE_INSTALL_PREFIX "${ROCM_PATH}" CACHE PATH "Install path prefix, prepended onto install directories")
 
 #Adding CMAKE_PREFIX_PATH
-list( APPEND CMAKE_PREFIX_PATH /opt/rocm/llvm /opt/rocm )
+list( APPEND CMAKE_PREFIX_PATH ${ROCM_PATH}/llvm ${ROCM_PATH} )
 
 # hipCUB project
 project(hipcub LANGUAGES CXX)
@@ -34,7 +40,7 @@ project(hipcub LANGUAGES CXX)
 # CMake modules
 list(APPEND CMAKE_MODULE_PATH
   ${CMAKE_CURRENT_SOURCE_DIR}/cmake
-  ${HIP_PATH}/cmake /opt/rocm/hip/cmake # FindHIP.cmake
+  ${HIP_PATH}/cmake ${ROCM_PATH}/hip/cmake # FindHIP.cmake
 )
 
 # Set a default build type if none was specified
@@ -70,7 +76,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 
 # Build options
 option(BUILD_TEST "Build tests (requires googletest)" OFF)

@@ -57,10 +57,12 @@ function(add_hipcub_test TEST_NAME TEST_SOURCES)
       PROPERTIES
           CUDA_SOURCE_PROPERTY_FORMAT OBJ
     )
-    CUDA_ADD_EXECUTABLE(${TEST_TARGET}
+    set_source_files_properties(${TEST_SOURCES} PROPERTIES HIP_SOURCE_PROPERTY_FORMAT 1)
+    HIP_ADD_EXECUTABLE(${TEST_TARGET}
       ${TEST_SOURCES}
-      OPTIONS
+     HIPCC_OPTIONS 
         --expt-extended-lambda
+	--expt-relaxed-constexpr
     )
     target_include_directories(${TEST_TARGET} SYSTEM BEFORE
       PUBLIC

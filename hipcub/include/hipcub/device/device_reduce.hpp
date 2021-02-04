@@ -29,6 +29,7 @@
 
 #ifndef HIPCUB_DEVICE_DEVICE_REDUCE_HPP_
 #define HIPCUB_DEVICE_DEVICE_REDUCE_HPP_
+#define  THRUST_IGNORE_CUB_VERSION_CHECK
 
 #ifdef __HIP_PLATFORM_HCC__
     #include "../backend/rocprim/device/device_reduce.hpp"
